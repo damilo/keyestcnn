@@ -1,4 +1,5 @@
 00.hlp/fft/src
+00.hlp/fft/test/*.wav
 00.hlp/fft/.ipynb_checkpoints
 00.hlp/msd/src
 00.hlp/msd/.ipynb_checkpoints
