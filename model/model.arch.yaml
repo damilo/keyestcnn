@@ -6,7 +6,7 @@ config:
   layers:
   - class_name: InputLayer
     config:
-      batch_input_shape: !!python/tuple [null, 174, 174, 1]
+      batch_input_shape: !!python/tuple [null, 162, 162, 1]
       dtype: float32
       name: input
       sparse: false
