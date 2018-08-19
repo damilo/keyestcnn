@@ -1,12 +1,24 @@
 # Machine Learning Engineer Nanodegree
-## Capstone Project
-Joe Udacity  
-December 31st, 2050
+## Capstone Project - Audio key estimation of digital music with CNNs
+Daniel Hellwig  
+August 20th, 2018
 
 ## I. Definition
 _(approx. 1-2 pages)_
 
 ### Project Overview
+The art of mixing recorded music in real time is known as DJing and performed by a Disc Jockey (DJ). DJs use specialized equipment that can play at least two sources of recorded music simultaneously to create smooth transitions from one song to another [2].
+
+The way of how the transitions are made evolved over the years and became extremely versatile nowadays. Hereby one DJ technique experienced a renaissance in 2006: harmonic mixing. The goal of harmonic mixing is to transition between songs of the same or related key. This technique enables a DJ to make smooth continuous mixes and prevents unstable tone combinations, known as dissonance [3]. But therefor the key of a song must be known.
+
+- talk about key (tonic, mode)
+- talk about octaves
+- wrap up > piano
+
+This project deals with the learning task to estimate audio keys of digital music with the help of convolutional neural networks (CNNs). The learning task is limited to diatonic scales which employs seven pitches per octave and is typically used in western music.
+
+To select appropriate songs, the Million Song Dataset (MSD) [8] is utilized. It provides data to one million analyzed songs, including information about their key and mode as well as how confident both are. This confidence is considered while choosing songs.
+
 In this section, look to provide a high-level overview of the project in layman’s terms. Questions to ask yourself when writing this section:
 - _Has an overview of the project been provided, such as the problem domain, project origin, and related datasets or input data?_
 - _Has enough background information been given so that an uninformed reader would understand the problem domain and following problem statement?_
