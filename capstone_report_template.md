@@ -4,7 +4,6 @@ Daniel Hellwig
 August 20th, 2018
 
 ## I. Definition
-_(approx. 1-2 pages)_
 
 ### Project Overview
 The art of mixing recorded music in real time is known as DJing and performed by a Disc Jockey (DJ). DJs use specialized equipment that can play at least two sources of recorded music simultaneously to create smooth transitions from one song to another [2].
@@ -38,16 +37,9 @@ The task includes:
 The resulting classifier can be used to determine the key of western music pieces.
 
 ### Metrics
-The used metric depends on the following question: Out of all estimated keys for given music pieces, how many were classified correctly? This can be calculated by the accuracy for binary classification problems:
-<pre>
-            TP + TN
-Acc_b = -----------------
-        TP + TN + FP + FN
-</pre>
-True positives (TP) and true negatives (TN) are considered as correct classified, whereas false positives (FP) and false negatives (FN) are considered as wrong classified.
+The used metric depends on the following question: Out of all estimated keys for given music pieces, how many were classified correctly? This can be calculated by the accuracy for binary classification problems.
 
-The songs within each key class are going to be unbalanced since there will be a high variety of patterns in the spectrograms.
-Due to this fact, it is better to use the F-beta score with beta=1 instead:
+Since the songs within each key class are going to be unbalanced due to a high variety of patterns in the spectrograms, it is better to use the F-beta score with beta=1 instead:
 <pre>
              Prec * Rec
 F_1 = 2 * -----------------
@@ -55,15 +47,21 @@ F_1 = 2 * -----------------
 </pre>
 with Prec = Precision, Rec = Recall.
 
----
-Since the classifier to solve this learning task has more than two ouput classes, ... . The confusion matrix is of shape (C, C), where C_i is the actual class and C_j is the predicted class.
-The accuracy metric changes to:
-
+For the comparison to another key estimation software, a second metric named MIREX evaluation procedure is used (src: http://music-ir.org/mirex/wiki/2005:Audio_and_Symbolic_Key_Finding#Evaluation_Procedures). The metric compares the identified key by the algorithm against the actual key of the piece and gives points dependant on their relationship:
 <pre>
-                     TP
-Acc_mc = SUM (-----------------)
-                   TP + FP
+Relation to correct key Points:
+same                       1.0
+distance of perfect fifth  0.5
+relative major/minor       0.3
+parallel major/minor       0.2 
 </pre>
+
+
+(circle of fifths)
+attribution: By Just plain Bill [GFDL (http://www.gnu.org/copyleft/fdl.html) or CC-BY-SA-3.0 (http://creativecommons.org/licenses/by-sa/3.0/)], from Wikimedia Commons
+
+The distance of perfect fifth can be either the dominant (fifth) or subdominant (fourth) from the tonic note of the actual key.
+The relative key is 
 
 ## II. Analysis
 _(approx. 2-4 pages)_
