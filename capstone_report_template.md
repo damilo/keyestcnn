@@ -38,10 +38,32 @@ The task includes:
 The resulting classifier can be used to determine the key of western music pieces.
 
 ### Metrics
-In this section, you will need to clearly define the metrics or calculations you will use to measure performance of a model or result in your project. These calculations and metrics should be justified based on the characteristics of the problem and problem domain. Questions to ask yourself when writing this section:
-- _Are the metrics you’ve chosen to measure the performance of your models clearly discussed and defined?_
-- _Have you provided reasonable justification for the metrics chosen based on the problem and solution?_
+The used metric depends on the following question: Out of all estimated keys for given music pieces, how many were classified correctly? This can be calculated by the accuracy for binary classification problems:
+<pre>
+            TP + TN
+Acc_b = -----------------
+        TP + TN + FP + FN
+</pre>
+True positives (TP) and true negatives (TN) are considered as correct classified, whereas false positives (FP) and false negatives (FN) are considered as wrong classified.
 
+The songs within each key class are going to be unbalanced since there will be a high variety of patterns in the spectrograms.
+Due to this fact, it is better to use the F-beta score with beta=1 instead:
+<pre>
+             Prec * Rec
+F_1 = 2 * -----------------
+             Prec + Rec
+</pre>
+with Prec = Precision, Rec = Recall.
+
+---
+Since the classifier to solve this learning task has more than two ouput classes, ... . The confusion matrix is of shape (C, C), where C_i is the actual class and C_j is the predicted class.
+The accuracy metric changes to:
+
+<pre>
+                     TP
+Acc_mc = SUM (-----------------)
+                   TP + FP
+</pre>
 
 ## II. Analysis
 _(approx. 2-4 pages)_
