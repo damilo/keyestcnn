@@ -1,6 +1,6 @@
 # Machine Learning Engineer Nanodegree
 ## Capstone Project - Audio key estimation of digital music with CNNs
-Daniel Hellwig  
+Daniel Hellwig
 August 20th, 2018
 
 ## I. Definition
@@ -10,11 +10,7 @@ The art of mixing recorded music in real time is known as DJing and performed by
 
 The way of how the transitions are made became extremely versatile nowadays. Hereby one DJ technique experienced a renaissance in 2006: harmonic mixing. The goal of harmonic mixing is to transition between songs of the same or related key, notes of a certain scale that form the basis of a piece of music. This technique enables a DJ to make smooth continuous mixes and prevents unstable tone combinations, known as dissonance [3].
 
-This project deals with the learning task to estimate audio keys of digital music. A mulitclass classifier is trained using samples of digital music files. The Million Song Dataset (MSD) [8] is utilized to select appropriate songs and includes information about their key and mode as well as how confident both are. The learning task is limited to diatonic scales, typically used in western music.
-
-- talk about key (tonic, mode)
-- talk about octaves
-- wrap up > piano
+This project deals with the learning task to estimate audio keys of digital music. A mulitclass classifier is trained using samples of digital music files. The Million Song Dataset (MSD) [8] is utilized to select appropriate songs and includes information about their tonic note and mode as well as how confident both are. The learning task is limited to diatonic scales, typically used in western music.
 
 ### Problem Statement
 The task is to estimate the audio key of a digital 30 second sample of a western music piece.
@@ -25,7 +21,7 @@ The task includes:
   - create a dataset of selected songs
 - Data Preprocessing
   - perform preparatory signal processing tasks
-  - extract features of the song dataset, output are spectrogram images
+  - extract features of the song dataset, output is spectrogram images
   - create a dataset of song spectrograms
 - Model Preparation/Training
   - preprocess the spectrograms
@@ -47,26 +43,38 @@ F_1 = 2 * -----------------
 </pre>
 with Prec = Precision, Rec = Recall.
 
-For the comparison to another key estimation software, a second metric named MIREX evaluation procedure is used (src: http://music-ir.org/mirex/wiki/2005:Audio_and_Symbolic_Key_Finding#Evaluation_Procedures). The metric compares the identified key by the algorithm against the actual key of the piece and gives points dependant on their relationship:
+For the comparison to another key estimation software, a second metric named MIREX evaluation procedure is used (src: http://music-ir.org/mirex/wiki/2005:Audio_and_Symbolic_Key_Finding#Evaluation_Procedures). The metric compares the identified key by the algorithm against the actual key of the piece and gives points dependent on their relationship:
 <pre>
-Relation to correct key Points:
+relation to correct key points:
 same                       1.0
 distance of perfect fifth  0.5
 relative major/minor       0.3
 parallel major/minor       0.2 
 </pre>
+The distance of perfect fifth can be either the dominant (fifth) or subdominant (fourth) from the tonic note of the actual key.
 
+The circle of fifths is shown below to better understand how the evaluation works:
+
+<img src='./_src_report/512px-Circle_of_fifths_deluxe_4.svg.png'>
 
 (circle of fifths)
 attribution: By Just plain Bill [GFDL (http://www.gnu.org/copyleft/fdl.html) or CC-BY-SA-3.0 (http://creativecommons.org/licenses/by-sa/3.0/)], from Wikimedia Commons
 
-The distance of perfect fifth can be either the dominant (fifth) or subdominant (fourth) from the tonic note of the actual key.
-The relative key is 
+Example: A music piece may have the actual key C major. The dominant is G major, the subdominant is F major. The relative key is A minor. The parallel key is C minor.
 
 ## II. Analysis
 _(approx. 2-4 pages)_
 
 ### Data Exploration
+The feature dataset used for the classifier holds spectrogram images of 30 second song samples. The songs itself are selected beforehand with the help of the Million Song Dataset.
+
+The Million Song Dataset is a collection of audio features and metadata for a million popular songs (src: https://labrosa.ee.columbia.edu/millionsong/), but it does not contain the songs itself. This datset is utilized to select appropriate songs which have a key an mode confidence of at least 75%. Two additional files which come along with the MSD are from interest: a summary file with song metadata of the whole dataset (http://labrosa.ee.columbia.edu/millionsong/sites/default/files/AdditionalFiles/msd_summary_file.h5) and a track file with all songs and their unique IDs (http://labrosa.ee.columbia.edu/millionsong/sites/default/files/AdditionalFiles/unique_tracks.txt).
+
+
+
+
+
+
 In this section, you will be expected to analyze the data you are using for the problem. This data can either be in the form of a dataset (or datasets), input data (or input files), or even an environment. The type of data should be thoroughly described and, if possible, have basic statistics and information presented (such as discussion of input features or defining characteristics about the input or environment). Any abnormalities or interesting qualities about the data that may need to be addressed have been identified (such as features that need to be transformed or the possibility of outliers). Questions to ask yourself when writing this section:
 - _If a dataset is present for this problem, have you thoroughly discussed certain features about the dataset? Has a data sample been provided to the reader?_
 - _If a dataset is present for this problem, are statistics about the dataset calculated and reported? Have any relevant results from this calculation been discussed?_
