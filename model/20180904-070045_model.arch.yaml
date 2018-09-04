@@ -1,0 +1,179 @@
+backend: tensorflow
+class_name: Model
+config:
+  input_layers:
+  - [input, 0, 0]
+  layers:
+  - class_name: InputLayer
+    config:
+      batch_input_shape: !!python/tuple [null, 160, 160, 1]
+      dtype: float32
+      name: input
+      sparse: false
+    inbound_nodes: []
+    name: input
+  - class_name: Conv2D
+    config:
+      activation: relu
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: &id002 !!python/tuple [1, 1]
+      filters: 32
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [2, 2]
+      name: conv2d_1
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: true
+    inbound_nodes:
+    - - - input
+        - 0
+        - 0
+        - {}
+    name: conv2d_1
+  - class_name: MaxPooling2D
+    config:
+      data_format: channels_last
+      name: maxp_1
+      padding: valid
+      pool_size: &id001 !!python/tuple [2, 2]
+      strides: *id001
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_1
+        - 0
+        - 0
+        - {}
+    name: maxp_1
+  - class_name: Conv2D
+    config:
+      activation: relu
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id002
+      filters: 64
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [2, 2]
+      name: conv2d_2
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: true
+    inbound_nodes:
+    - - - maxp_1
+        - 0
+        - 0
+        - {}
+    name: conv2d_2
+  - class_name: MaxPooling2D
+    config:
+      data_format: channels_last
+      name: maxp_2
+      padding: valid
+      pool_size: &id003 !!python/tuple [2, 2]
+      strides: *id003
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_2
+        - 0
+        - 0
+        - {}
+    name: maxp_2
+  - class_name: Conv2D
+    config:
+      activation: relu
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      data_format: channels_last
+      dilation_rate: *id002
+      filters: 128
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      kernel_size: !!python/tuple [2, 2]
+      name: conv2d_3
+      padding: same
+      strides: !!python/tuple [1, 1]
+      trainable: true
+      use_bias: true
+    inbound_nodes:
+    - - - maxp_2
+        - 0
+        - 0
+        - {}
+    name: conv2d_3
+  - class_name: MaxPooling2D
+    config:
+      data_format: channels_last
+      name: maxp_3
+      padding: valid
+      pool_size: &id004 !!python/tuple [2, 2]
+      strides: *id004
+      trainable: true
+    inbound_nodes:
+    - - - conv2d_3
+        - 0
+        - 0
+        - {}
+    name: maxp_3
+  - class_name: GlobalAveragePooling2D
+    config: {data_format: channels_last, name: avg_flatten, trainable: true}
+    inbound_nodes:
+    - - - maxp_3
+        - 0
+        - 0
+        - {}
+    name: avg_flatten
+  - class_name: Dense
+    config:
+      activation: softmax
+      activity_regularizer: null
+      bias_constraint: null
+      bias_initializer:
+        class_name: Zeros
+        config: {}
+      bias_regularizer: null
+      kernel_constraint: null
+      kernel_initializer:
+        class_name: VarianceScaling
+        config: {distribution: uniform, mode: fan_avg, scale: 1.0, seed: null}
+      kernel_regularizer: null
+      name: output
+      trainable: true
+      units: 24
+      use_bias: true
+    inbound_nodes:
+    - - - avg_flatten
+        - 0
+        - 0
+        - {}
+    name: output
+  name: model_1
+  output_layers:
+  - [output, 0, 0]
+keras_version: 2.2.2
