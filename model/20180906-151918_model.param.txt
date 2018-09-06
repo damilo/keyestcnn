@@ -1,0 +1,1 @@
+{'loss': "<class 'function'>", 'mom': 0.0, 'seed': 42, 'use_img_std': True, 'lr': 0.01, 'opt': "<class 'keras.optimizers.SGD'>"}
