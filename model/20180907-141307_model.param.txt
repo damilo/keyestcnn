@@ -1,0 +1,1 @@
+{'batch_size': 44, 'epochs': 100, 'opt': "<class 'keras.optimizers.SGD'>", 'mom': 0.3, 'val_split': 0.15384615384615385, 'lr': 0.1, 'seed': 42, 'use_img_std': True, 'loss': "<class 'function'>"}
