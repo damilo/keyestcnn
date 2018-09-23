@@ -7,5 +7,6 @@
 
 src_audio
 src_bench
+src_spectro_small
 
 .ipynb_checkpoints
